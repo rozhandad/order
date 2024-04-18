@@ -1,0 +1,16 @@
+*** Edit Order by Customer Change log ***
+
+2024-04-08 - version 1.1.1
+* Fix - Fixed product stock increase/descrease issue on frontend.
+* Fix - Fixed product stock decrease issue if product is added from the frontend.
+* Fix - Fixed product stock increase issue if product is removed.
+
+2023-12-12 - version 1.1.0
+* Update - Compatible with WooCommerce High-Performance Order Storage (HPOS).
+* Update - Compatibility updated for latest versions of WooCommerce and WordPress.
+
+2022-09-09 - version 1.0.1
+* Update - Compatibility updated for latest versions of WooCommerce and WordPress.
+
+2021-09-20 - version 1.0.0
+* Other - Initial release of the plugin.

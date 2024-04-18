@@ -1,0 +1,29 @@
+<wpml-config>
+  <custom-fields>
+    <custom-field action="copy-once">_customer_user</custom-field>
+    <custom-field action="copy-once">_payment_method</custom-field>
+    <custom-field action="copy-once">_payment_method_title</custom-field>
+    <custom-field action="copy-once">_billing_first_name</custom-field>
+    <custom-field action="copy-once">_billing_last_name</custom-field>
+    <custom-field action="copy-once">_billing_company</custom-field>
+    <custom-field action="copy-once">_billing_address_1</custom-field>
+    <custom-field action="copy-once">_billing_address_2</custom-field>
+    <custom-field action="copy-once">_billing_city</custom-field>
+    <custom-field action="copy-once">_billing_state</custom-field>
+    <custom-field action="copy-once">_billing_postcode</custom-field>
+    <custom-field action="copy-once">_billing_country</custom-field>
+    <custom-field action="copy-once">_billing_email</custom-field>
+    <custom-field action="copy-once">_billing_phone</custom-field>
+    <custom-field action="copy-once">_shipping_first_name</custom-field>
+    <custom-field action="copy-once">_shipping_last_name</custom-field>
+    <custom-field action="copy-once">_shipping_company</custom-field>
+    <custom-field action="copy-once">_shipping_address_1</custom-field>
+    <custom-field action="copy-once">_shipping_address_2</custom-field>
+    <custom-field action="copy-once">_shipping_city</custom-field>
+    <custom-field action="copy-once">_shipping_state</custom-field>
+    <custom-field action="copy-once">_shipping_postcode</custom-field>
+    <custom-field action="copy-once">_shipping_country</custom-field>
+    <custom-field action="copy-once">_billing_address_index</custom-field>
+    <custom-field action="copy-once">_shipping_address_index</custom-field>
+  </custom-fields>
+</wpml-config>
