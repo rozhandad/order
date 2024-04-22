@@ -1,3 +1,7 @@
+import chromedriver_autoinstaller
+print(chromedriver_autoinstaller.get_chromedriver_filename())
+
+
 pip install pyTelegramBotAPI
 pip install selenium
 pip install chromedriver-autoinstaller
