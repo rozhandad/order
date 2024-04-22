@@ -1,11 +1,38 @@
-import chromedriver_autoinstaller
+ادمین کردن یوزر
+sudo su
 
-# نصب Chromedriver
+اپدیت
+apt install
+apt update
+
+سپس نصب پایتون و ابزارهای مربوط به آن با دستور زیر:
+sudo apt install python3 python3-pip
+
+نصب
+pip install pyTelegramBotAPI selenium chromedriver-autoinstaller
+
+و
+import chromedriver_autoinstaller 
 chromedriver_autoinstaller.install()
 
-# دریافت مسیر Chromedriver
-chromedriver_path = chromedriver_autoinstaller.get_chromedriver_path()
-print("مسیر فایل Chromedriver:", chromedriver_path)
+نصب
+sudo apt update
+sudo apt install chromium-chromedriver
+
+سپس، می‌توانید از دستور زیر برای یافتن مسیر chromedriver استفاده کنید:
+dpkg -L chromium-chromedriver | grep chromedriver
+
+برای اجرای کد اول این کد را اجرا کنید
+python3
+و بعد اجرای کد اصلی 
+
+
+
+
+
+
+
+
 
 
 pip install pyTelegramBotAPI
