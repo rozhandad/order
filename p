@@ -18,7 +18,7 @@ accounts = [
 # تابع برای ورود به ویدیو چت با استفاده از Selenium
 def join_video_chat(username):
     try:
-        driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver')
+        driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver')
         driver.get('https://t.me/ghvoice?livestream=4789f1d3a3498d93b7')
         time.sleep(5)  # انتظار برای بارگذاری صفحه
         # ورود به حساب با نام کاربری
