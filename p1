@@ -35,58 +35,48 @@ python3
 
 
 
-pip install pyTelegramBotAPI
-pip install selenium
-pip install chromedriver-autoinstaller
+!pip install pyTelegramBotAPI
+!pip install selenium
 import telebot
-import time
+import re
 from selenium import webdriver
-import chromedriver_autoinstaller
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# نصب و فعالسازی chromedriver
-chromedriver_autoinstaller.install()
-
-# توکن ربات تلگرام
+# توکن ربات خود را اینجا وارد کنید
 TOKEN = '6857897922:AAGJEQOGpJRE5v3LPBbgFszPYWbDCJnf2wk'
 
-# لیست اکانت‌های تلگرام
-accounts = [
-    'mamimann',
-    'account2_username',
-    # اکانت‌های بیشتر اینجا اضافه شوند
-]
-
-# تابع برای ورود به ویدیو چت با استفاده از Selenium
-def join_video_chat(username):
-    try:
-        driver = webdriver.Chrome()
-        driver.get('https://t.me/ghvoice?livestream=4789f1d3a3498d93b7')
-        time.sleep(5)  # انتظار برای بارگذاری صفحه
-        # ورود به حساب با نام کاربری
-        username_input = driver.find_element_by_xpath('//*[@id="username"]')
-        username_input.send_keys(username)
-        # انتظار برای ورود به ویدیو چت
-        time.sleep(5)
-        driver.quit()
-    except Exception as e:
-        print(f"Error joining video chat: {e}")
-
-# ایجاد ربات با استفاده از توکن
 bot = telebot.TeleBot(TOKEN)
 
-@bot.message_handler(commands=['start'])
-def send_welcome(message):
-    bot.reply_to(message, "سلام! برای شروع عملیات جوین به چت ویدیو /join را ارسال کنید.")
+# تنظیمات مربوط به مرورگر سلنیوم
+CHROME_DRIVER_PATH = '/usr/local/lib/chromedriver'  # مسیر فایل درایور Chrome
+CHROME_OPTIONS = webdriver.ChromeOptions()
+CHROME_OPTIONS.add_argument('--headless')  # مخفی کردن پنجره مرورگر
 
+# متد برای پاسخ به دستور join
 @bot.message_handler(commands=['join'])
-def join_video_chats(message):
-    try:
-        for account in accounts:
-            # ورود به ویدیو چت برای هر اکانت
-            join_video_chat(account)
-        bot.reply_to(message, "تمام اکانت‌ها با موفقیت به ویدیو چت پیوستند!")
-    except Exception as e:
-        bot.reply_to(message, f"خطا در ورود به ویدیو چت: {e}")
+def handle_join(message):
+    # از پیام دریافتی عبارتی که شامل لینک‌های تلگرام باشد را پیدا می‌کنیم
+    links = re.findall(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', message.text)
+    if links:
+        for link in links:
+            # ورود به ویدیو چت با استفاده از Selenium
+            driver = None
+            try:
+                driver = webdriver.Chrome(executable_path=CHROME_DRIVER_PATH, options=CHROME_OPTIONS)
+                driver.get(link)
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'input-field')))
+                bot.reply_to(message, f"Successfully joined chat: {link}")
+            except Exception as e:
+                bot.reply_to(message, f"Error joining chat: {e}")
+            finally:
+                if driver:
+                    driver.quit()
+    else:
+        bot.reply_to(message, "No links found!")
 
-# اجرای ربات
+# شروع ربات
 bot.polling()
+
