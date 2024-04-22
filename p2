@@ -1,0 +1,41 @@
+!pip install pyTelegramBotAPI
+import telebot
+import time
+
+# توکن ربات تلگرام
+TOKEN = '6857897922:AAGJEQOGpJRE5v3LPBbgFszPYWbDCJnf2wk'
+
+# لیست اکانت‌های تلگرام
+accounts = [
+    'mamimann',
+    'account2_username',
+    # اکانت‌های بیشتر اینجا اضافه شوند
+]
+
+# تابع برای ارسال درخواست جوین به چت ویس
+def join_voice_chat(bot, chat_id):
+    try:
+        bot.send_chat_action(chat_id, 'join')
+        time.sleep(2)  # انتظار برای ورود به چت ویس
+    except Exception as e:
+        print(f"Error joining voice chat: {e}")
+
+# ایجاد ربات با استفاده از توکن
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "سلام! برای شروع عملیات جوین به چت ویس /join را ارسال کنید.")
+
+@bot.message_handler(commands=['join'])
+def join_voice_chats(message):
+    try:
+        for account in accounts:
+            # ارسال درخواست جوین به چت ویس برای هر اکانت
+            join_voice_chat(bot, account)
+        bot.reply_to(message, "تمام اکانت‌ها با موفقیت به چت ویس پیوستند!")
+    except Exception as e:
+        bot.reply_to(message, f"خطا در ارسال درخواست جوین به چت ویس: {e}")
+
+# اجرای ربات
+bot.polling()
