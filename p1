@@ -1,5 +1,11 @@
 import chromedriver_autoinstaller
-print(chromedriver_autoinstaller.get_chromedriver_filename())
+
+# نصب Chromedriver
+chromedriver_autoinstaller.install()
+
+# دریافت مسیر Chromedriver
+chromedriver_path = chromedriver_autoinstaller.get_chromedriver_path()
+print("مسیر فایل Chromedriver:", chromedriver_path)
 
 
 pip install pyTelegramBotAPI
